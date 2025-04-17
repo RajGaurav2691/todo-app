@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import TodoList from "./components/TodoList";
 import "./App.css";
 import { DragDropContext } from "react-beautiful-dnd";
+import { HashRouter as Router, Routes, Route } from "react-router-dom"; // ⬅️ Added this
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -67,57 +68,67 @@ function App() {
   };
 
   return (
-    <div className={`app ${darkMode ? "dark" : ""}`}>
-      <h1>React Todo App</h1>
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div className={`app ${darkMode ? "dark" : ""}`}>
+              <h1>React Todo App</h1>
 
-      {/* 🌙 Theme Toggle */}
-      <button className="theme-toggle" onClick={() => setDarkMode(!darkMode)}>
-        {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
-      </button>
+              {/* 🌙 Theme Toggle */}
+              <button className="theme-toggle" onClick={() => setDarkMode(!darkMode)}>
+                {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
+              </button>
 
-      {/* 🔍 Search */}
-      <input
-        type="text"
-        className="search-bar"
-        placeholder="Search todos..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
+              {/* 🔍 Search */}
+              <input
+                type="text"
+                className="search-bar"
+                placeholder="Search todos..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
 
-      {/* ➕ Add */}
-      <div className="input-section">
-        <input
-          type="text"
-          value={newTodo}
-          onChange={(e) => setNewTodo(e.target.value)}
-          placeholder="Add new task..."
+              {/* ➕ Add */}
+              <div className="input-section">
+                <input
+                  type="text"
+                  value={newTodo}
+                  onChange={(e) => setNewTodo(e.target.value)}
+                  placeholder="Add new task..."
+                />
+                <button onClick={addTodo}>Add</button>
+              </div>
+
+              {/* Filters */}
+              <div className="filter-buttons">
+                <button onClick={() => setFilter("all")} className={filter === "all" ? "active" : ""}>
+                  All
+                </button>
+                <button onClick={() => setFilter("active")} className={filter === "active" ? "active" : ""}>
+                  Active
+                </button>
+                <button onClick={() => setFilter("completed")} className={filter === "completed" ? "active" : ""}>
+                  Completed
+                </button>
+              </div>
+
+              {/* 📦 Drag & Drop Context */}
+              <DragDropContext onDragEnd={handleDragEnd}>
+                <TodoList
+                  todos={getFilteredTodos()}
+                  toggleTodo={toggleTodo}
+                  deleteTodo={deleteTodo}
+                />
+              </DragDropContext>
+            </div>
+          }
         />
-        <button onClick={addTodo}>Add</button>
-      </div>
-
-      {/* Filters */}
-      <div className="filter-buttons">
-        <button onClick={() => setFilter("all")} className={filter === "all" ? "active" : ""}>
-          All
-        </button>
-        <button onClick={() => setFilter("active")} className={filter === "active" ? "active" : ""}>
-          Active
-        </button>
-        <button onClick={() => setFilter("completed")} className={filter === "completed" ? "active" : ""}>
-          Completed
-        </button>
-      </div>
-
-      {/* 📦 Drag & Drop Context */}
-      <DragDropContext onDragEnd={handleDragEnd}>
-        <TodoList
-          todos={getFilteredTodos()}
-          toggleTodo={toggleTodo}
-          deleteTodo={deleteTodo}
-        />
-      </DragDropContext>
-    </div>
+      </Routes>
+    </Router>
   );
 }
 
 export default App;
+``
