@@ -1,0 +1,144 @@
+:root {
+  --bg: grey;
+  --primary: #6c63ff;
+  --accent: #a29bfe;
+  --text: #12beee;
+  --completed: #090b0b;
+  --card: yellow;
+}
+
+body {
+  background-color: var(--bg);
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.app {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 25px;
+  text-align: center;
+  background-color: var(--card);
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+  color: var(--text);
+}
+
+.input-section {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  width: 70%;
+  border-radius: 8px;
+  border: 1px solid var(--accent);
+  font-size: 16px;
+}
+
+button {
+  background-color: var(--primary);
+  color: rgb(244, 244, 244);
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: var(--accent);
+}
+
+.filter-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.filter-buttons button.active {
+  background-color: var(--accent);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #d5a413;
+  margin: 10px 0;
+  padding: 12px 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  
+  /* 👇 SMOOTH DRAG ANIMATION */
+  transition: background-color 0.3s, transform 0.2s ease;
+}
+
+.todo-item:active {
+  transform: scale(1.01);
+  background-color: #f7c948;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: var(--completed);
+}
+
+.search-bar {
+  width: 90%;
+  max-width: 400px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* 🌙 Dark Mode */
+body.dark,
+.app.dark {
+  background-color: #1e1e2f;
+  color: #f1f1f1;
+}
+
+.app.dark input,
+.app.dark .search-bar {
+  background-color: #2c2c3b;
+  color: white;
+  border: 1px solid #555;
+}
+
+.app.dark .todo-item {
+  background-color: #2a2a3d;
+  color: white;
+}
+
+.app.dark .todo-item:active {
+  background-color: #333355;
+}
+
+.app.dark button {
+  background-color: #6c5ce7;
+}
+
+.theme-toggle {
+  margin-bottom: 15px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
