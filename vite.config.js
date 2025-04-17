@@ -1,10 +1,10 @@
-// vite.config.js
-
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
 
 export default defineConfig({
-  plugins: [react()],
-  base: '/todo-app/', // 👈 ye line sab kuch theek kar degi
-})
+  base: '/todo-app/',  // Ye line add karo
+  build: {
+    outDir: 'dist',
+  },
+});
+
 
