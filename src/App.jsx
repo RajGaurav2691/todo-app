@@ -122,6 +122,7 @@ function App() {
           type="date"
           value={dueDate}
           onChange={handleDueDateChange}
+          className="due-date-input" // Added for styling
         />
         
         <button onClick={addTodo}>Add</button>
@@ -148,9 +149,33 @@ function App() {
           deleteTodo={deleteTodo}
         />
       </DragDropContext>
+
+      {/* Todo List Items */}
+      <div className="todo-items">
+        {todos.map((todo) => (
+          <div key={todo.id} className="todo-item">
+            <div
+              className={`todo-text ${todo.completed ? "completed" : ""}`}
+              onClick={() => toggleTodo(todo.id)}
+            >
+              {todo.text}
+            </div>
+            
+            {/* Display Due Date */}
+            {todo.dueDate && (
+              <div className="due-date">
+                Due: {moment(todo.dueDate).format("MMM Do, YYYY")}
+              </div>
+            )}
+            
+            <button onClick={() => deleteTodo(todo.id)} className="delete-btn">Delete</button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
 
 export default App;
+
 
